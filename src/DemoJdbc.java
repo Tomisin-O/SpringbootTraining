@@ -9,7 +9,7 @@ public class DemoJdbc {
         String url = "jdbc:postgresql://localhost:5432/Demo";
         String username = "postgres";
         String password = "1234";
-        String sql = "select sname from student where sid = 1";
+        String sql = "select * from student";
 
         Class.forName("org.postgresql.Driver");
         //connect jar to db
@@ -18,10 +18,16 @@ public class DemoJdbc {
 
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);
-        rs.next();
-        String name = rs.getString("sname");
+//        rs.next();
+//        String name = rs.getString("sname");
+//        System.out.println("Name of the student is " + name );
 
-        System.out.println("Name of the student is " + name );
+        while(rs.next()) {
+            System.out.print(rs.getInt(1) + " - ");
+            System.out.print(rs.getString(2) + " - ");
+            System.out.println(rs.getInt(3));
+        }
+
         con.close();
         System.out.println("connection is closed");
     }
